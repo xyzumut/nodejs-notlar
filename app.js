@@ -2,24 +2,21 @@ const http      = require('http');
 const express   = require('express');
 const parser    = require('body-parser'); // npm i body-parser
 
+const adminRoutes   = require('./routes/yonetim');
+const magazaRoutes  = require('./routes/magaza')
 
 const app = express();
 
 app.use(parser.urlencoded({extended: false}));
+// rota gruplama mevzu
+app.use('/yonetim', adminRoutes);
+app.use(magazaRoutes);
 
-app.post('/urun-ekle', (req, res, next) => {
-    res.send('<form action="/urun" method="POST"> <input placeholder="Ürün Gir" type="text" name="deger"/> <button type="submit"> Ekle </button> </form>')
-});
-
-app.use('/urun',(req, res, next) => {
-    console.log(req.body);
-    res.redirect('/');
-});
-
+// Tüm http metotlarını çeker
 app.use('/',(req, res, next) => {
-    res.send('<t2>Ana Sayfa</t2>');
+    // res.status(404);
+    // res.send('<t1>404 Sayfası</t1>');
+    res.status(404).send('<t1>404 Sayfası</t1>');
 });
-
-
 
 app.listen(3000);
