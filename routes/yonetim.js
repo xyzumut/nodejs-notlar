@@ -1,11 +1,10 @@
 const express   = require('express');
+const path      = require('path');
 
 const router = express.Router();
 
 router.get('/urun-ekle', (req, res, next) => {
-    res.send(
-        '<form action="/yonetim/urun" method="POST"> <input placeholder="Ürün Gir" type="text" name="deger"/> <button type="submit"> Ekle </button> </form>'
-    );
+    res.sendFile(path.join(global.myRoot, 'views', 'urun-ekle.html'));
 });
 
 router.use('/urun',(req, res, next) => {
